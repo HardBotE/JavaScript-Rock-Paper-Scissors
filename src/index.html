@@ -40,14 +40,22 @@
             <p>Number of draws:<br>
             <p id="nod"></p>
         </div>
+        <div>
+            <button onclick="scores.wins=0;
+            scores.losses=0;
+            scores.draws=0;
+            localStorage.removeItem('eredmeny');">Reset Counter</button>
+        </div>
     </div>
     <script>
         let randomStep = '';
-        const scores = {
-                wins:  0,
-                losses: 0,
-                draws: 0
-            };
+        const scores = JSON.parse(localStorage.getItem('eredmeny')) || {
+            wins:0,
+            losses:0,
+            draws:0
+        };
+        
+        
             
         let score = '';
         let enemyStep = '';
@@ -84,11 +92,11 @@
             else if (playerStep === 'Scissors') {
                 if (enemyStep === 'Rock')
                     {
-                        score = 'You Lose';
+                        score = 'You lose';
                     }
                 else
                     {
-                        score = 'You win';
+                        score = 'You Win';
                     }
             }
             else if (playerStep === 'Paper') {
@@ -107,7 +115,10 @@
                 scores.losses++;
             else if(score==='Draw')
                 scores.draws++;
+            localStorage.setItem('eredmeny',JSON.stringify(scores));
+            console.log(localStorage);
             return score;
+
         }
         step();
         function game(playerStep) {
@@ -117,7 +128,7 @@
             document.getElementById('nol').textContent = scores.losses;
             document.getElementById('nod').textContent = scores.draws;
         }
-
+        console.log(JSON.stringify(scores));
     </script>
 </body>
 
