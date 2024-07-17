@@ -43,11 +43,15 @@
     </div>
     <script>
         let randomStep = '';
-        let draw = 0;
-        let win = 0;
-        let lose = 0;
+        const scores = {
+                wins:  0,
+                losses: 0,
+                draws: 0
+            };
+            
         let score = '';
         let enemyStep = '';
+
         function computerStep() {
             let rnd = Math.random();
             if (rnd <= 1 / 3)
@@ -59,23 +63,21 @@
             }
             return enemyStep;
         }
+
         function step(playerStep) {
             let enemyStep = computerStep();
             if (playerStep === enemyStep)
                 {
                     score = 'Draw';
-                    draw++;
                 }
             else if (playerStep === 'Rock') {
                 if (enemyStep === 'Scissors')
                   {
-                    score = 'You win';
-                    win++;
+                    score = 'You Win';
                   }
                 else
                     {
                         score = 'You lose';
-                        lose++;
                     }
 
             }
@@ -83,36 +85,37 @@
                 if (enemyStep === 'Rock')
                     {
                         score = 'You Lose';
-                        lose++;
                     }
                 else
                     {
                         score = 'You win';
-                        win++;
                     }
             }
             else if (playerStep === 'Paper') {
                 if (enemyStep === 'Rock')
                     {
                         score = 'You Win';
-                        win++;
                     }
                 else
                     {
                         score = 'You lose';
-                        lose++;
                     }
             }
+            if(score==='You Win')
+                scores.wins++;
+            else if(score==='You lose')
+                scores.losses++;
+            else if(score==='Draw')
+                scores.draws++;
             return score;
         }
         step();
         function game(playerStep) {
             score = step(playerStep);
             console.log(`You picked ${playerStep}. The computer picked ${enemyStep}. ${score}`);
-            document.getElementById('now').textContent = win;
-            document.getElementById('nol').textContent = lose;
-            document.getElementById('nod').textContent = draw;
-
+            document.getElementById('now').textContent = scores.wins;
+            document.getElementById('nol').textContent = scores.losses;
+            document.getElementById('nod').textContent = scores.draws;
         }
 
     </script>
