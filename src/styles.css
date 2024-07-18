@@ -1,0 +1,23 @@
+
+body{
+    background:rgb(25, 25, 25);
+    color:white;
+}
+h1{
+    style=font-size: 50px;
+    font-weight: bold;
+}
+.choose-icon{
+    height: 200px;
+    background-color:transparent;
+    border-radius:100px;
+    border: 3px solid white;
+    cursor: pointer;
+}
+.result{
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+.little-icons{
+    height:50px;
+}
